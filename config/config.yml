@@ -1,0 +1,56 @@
+---
+# Container descriptor
+- descriptor: "pip-services:context-info:default:default:1.0"
+  name: "service-sms"
+  description: "sms delivery microservice for pip-services"
+
+# Console logger
+- descriptor: "pip-services:logger:console:default:1.0"
+  level: "trace"
+# Performance counters that posts values to log
+- descriptor: "pip-services:counters:log:default:1.0"
+  level: "trace"
+
+# Default controller
+- descriptor: "service-sms:controller:default:default:1.0"
+  connection:
+    service: "{{{SMS_SERVICE}}}"
+    host: "{{{SMS_SERVICE_HOST}}}"
+    secure_connection: "{{{SMS_SSL}}}"
+    port: "{{{SMS_SERVICE_PORT}}}"
+  credential:
+    username: "{{{SMS_USER}}}"
+    password: "{{{SMS_PASS}}}"
+  message:
+    from: "{{{SMS_FROM}}}"
+  parameters:
+    client_name: "{{{CLIENT_NAME}}}"
+    client_url: "{{{CLIENT_URL}}}"
+    server_url: "{{{SERVER_URL}}}"
+    signature: "{{{SMS_SIGNATURE}}}"
+  options:
+    magic_code: "{{{MAGIC_CODE}}}"
+    verify_on_create: {{SMS_VALIDATE_ON_CREATE}}{{#unless SMS_VALIDATE_ON_CREATE}}true{{/unless}}
+    verify_on_update: {{SMS_VALIDATE_ON_UPDATE}}{{#unless SMS_VALIDATE_ON_UPDATE}}true{{/unless}}
+
+# Common HTTP endpoint
+- descriptor: "pip-services:endpoint:http:default:1.0"
+  connection:
+    protocol: "http"
+    host: "0.0.0.0"
+    port: 8080
+
+# HTTP endpoint version 1.0
+- descriptor: "service-sms:service:http:default:1.0"
+  swagger:
+    enable: true
+    auto: true
+
+# Heartbeat service
+- descriptor: "pip-services:heartbeat-service:http:default:1.0"
+
+# Status service
+- descriptor: "pip-services:status-service:http:default:1.0"
+
+# Swagger service
+- descriptor: "pip-services:swagger-service:http:default:1.0"

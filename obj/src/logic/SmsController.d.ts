@@ -1,0 +1,38 @@
+import { ConfigParams } from 'pip-services3-commons-nodex';
+import { IConfigurable } from 'pip-services3-commons-nodex';
+import { IReferences } from 'pip-services3-commons-nodex';
+import { IReferenceable } from 'pip-services3-commons-nodex';
+import { ICommandable } from 'pip-services3-commons-nodex';
+import { CommandSet } from 'pip-services3-commons-nodex';
+import { IOpenable } from 'pip-services3-commons-nodex';
+import { SmsMessageV1 } from '../data/version1/SmsMessageV1';
+import { SmsRecipientV1 } from '../data/version1/SmsRecipientV1';
+import { ISmsController } from './ISmsController';
+export declare class SmsController implements IConfigurable, IReferenceable, ICommandable, IOpenable, ISmsController {
+    private static _defaultConfig;
+    private _credentialResolver;
+    private _logger;
+    private _sns;
+    private _opened;
+    private _credential;
+    private _config;
+    private _messageFrom;
+    private _parameters;
+    private _disabled;
+    private _connectTimeout;
+    private _maxPrice;
+    private _smsType;
+    private _commandSet;
+    configure(config: ConfigParams): void;
+    setReferences(references: IReferences): void;
+    getCommandSet(): CommandSet;
+    isOpen(): boolean;
+    open(correlationId: string): Promise<void>;
+    close(correlationId: string): Promise<void>;
+    private getLanguageTemplate;
+    private renderTemplate;
+    sendMessage(correlationId: string, message: SmsMessageV1, parameters: ConfigParams): Promise<void>;
+    private makeRecipientParameters;
+    sendMessageToRecipient(correlationId: string, recipient: SmsRecipientV1, message: SmsMessageV1, parameters: ConfigParams): Promise<void>;
+    sendMessageToRecipients(correlationId: string, recipients: SmsRecipientV1[], message: SmsMessageV1, parameters: ConfigParams): Promise<void>;
+}
