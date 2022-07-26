@@ -4,5 +4,6 @@
 /data/sms_settings.test.json
 /data/sms_settings.json
 /obj/test
+/package-lock.json
 /docker/id_rsa*
-package-lock.json
+/docker/.npmrc
