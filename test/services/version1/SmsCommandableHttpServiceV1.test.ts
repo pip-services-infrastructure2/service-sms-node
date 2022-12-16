@@ -6,7 +6,7 @@ import { Descriptor } from 'pip-services3-commons-nodex';
 import { References } from 'pip-services3-commons-nodex';
 
 import { SmsController } from '../../../src/logic/SmsController';
-import { SmsHttpServiceV1 } from '../../../src/services/version1/SmsHttpServiceV1';
+import { SmsCommandableHttpServiceV1 } from '../../../src/services/version1/SmsCommandableHttpServiceV1';
 
 let httpConfig = ConfigParams.fromTuples(
     "connection.protocol", "http",
@@ -14,8 +14,8 @@ let httpConfig = ConfigParams.fromTuples(
     "connection.port", 3000
 );
 
-suite('SmsHttpServiceV1', ()=> {
-    let service: SmsHttpServiceV1;
+suite('SmsCommandableHttpServiceV1', ()=> {
+    let service: SmsCommandableHttpServiceV1;
 
     let rest: any;
 
@@ -23,12 +23,12 @@ suite('SmsHttpServiceV1', ()=> {
         let controller = new SmsController();
         controller.configure(new ConfigParams());
 
-        service = new SmsHttpServiceV1();
+        service = new SmsCommandableHttpServiceV1();
         service.configure(httpConfig);
 
         let references: References = References.fromTuples(
             new Descriptor('service-sms', 'controller', 'default', 'default', '1.0'), controller,
-            new Descriptor('service-sms', 'service', 'http', 'default', '1.0'), service
+            new Descriptor('service-sms', 'service', 'commandable-http', 'default', '1.0'), service
         );
         controller.setReferences(references);
         service.setReferences(references);

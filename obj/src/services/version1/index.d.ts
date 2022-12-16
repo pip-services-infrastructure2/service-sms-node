@@ -1,1 +1,1 @@
-export { SmsHttpServiceV1 } from './SmsHttpServiceV1';
+export { SmsCommandableHttpServiceV1 as SmsHttpServiceV1 } from './SmsCommandableHttpServiceV1';
