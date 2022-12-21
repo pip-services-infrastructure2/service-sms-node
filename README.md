@@ -85,7 +85,7 @@ Example of microservice configuration
     access_id: 'xxx'
     access_key: 'xxx'
   
-- descriptor: "service-sms:service:http:default:1.0"
+- descriptor: "service-sms:service:commandable-http:default:1.0"
   connection:
     protocol: "http"
     host: "0.0.0.0"
